@@ -1,5 +1,5 @@
 {
-  description = "Elyth's NeoVim configuration";
+  description = "orangc's NeoVim configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,15 +14,14 @@
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      nixvim,
-      flake-parts,
-      pre-commit-hooks,
-      ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = {
+    nixpkgs,
+    nixvim,
+    flake-parts,
+    pre-commit-hooks,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "aarch64-linux"
         "x86_64-linux"
@@ -30,42 +29,39 @@
         "x86_64-darwin"
       ];
 
-      perSystem =
-        {
-          system,
-          pkgs,
-          self',
-          lib,
-          ...
-        }:
-        let
-          nixvim' = nixvim.legacyPackages.${system};
-          nvim = nixvim'.makeNixvimWithModule {
-            inherit pkgs;
-            module = ./config;
-          };
-        in
-        {
-          checks = {
-            pre-commit-check = pre-commit-hooks.lib.${system}.run {
-              src = ./.;
-              hooks = {
-                statix.enable = true;
-                nixfmt = {
-                  enable = true;
-                  package = pkgs.nixfmt-rfc-style;
-                };
+      perSystem = {
+        system,
+        pkgs,
+        self',
+        lib,
+        ...
+      }: let
+        nixvim' = nixvim.legacyPackages.${system};
+        nvim = nixvim'.makeNixvimWithModule {
+          inherit pkgs;
+          module = ./config;
+        };
+      in {
+        checks = {
+          pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              statix.enable = true;
+              nixfmt = {
+                enable = true;
+                package = pkgs.nixfmt-rfc-style;
               };
             };
           };
-
-          formatter = pkgs.nixfmt-rfc-style;
-
-          packages.default = nvim;
-
-          devShells = {
-            default = with pkgs; mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
-          };
         };
+
+        formatter = pkgs.nixfmt-rfc-style;
+
+        packages.default = nvim;
+
+        devShells = {
+          default = with pkgs; mkShell {inherit (self'.checks.pre-commit-check) shellHook;};
+        };
+      };
     };
 }
