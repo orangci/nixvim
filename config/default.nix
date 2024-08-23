@@ -47,6 +47,7 @@
     ./plug/ui/nvim-notify.nix
     #./plug/ui/precognition.nix
     ./plug/ui/telescope.nix
+    ./plug/ui/nvim-tree.nix
 
     #./plug/utils/harpoon.nix
     ./plug/utils/comment.nix
