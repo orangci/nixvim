@@ -1,8 +1,8 @@
 {
   plugins.conform-nvim = {
     enable = true;
-    notifyOnError = true;
-    formattersByFt = {
+    notify_on_error = true;
+    formatters_by_ft = {
       liquidsoap = ["liquidsoap-prettier"];
       html = [
         [
