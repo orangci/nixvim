@@ -22,7 +22,7 @@
     ./plug/git/lazygit.nix
     ./plug/git/worktree.nix
 
-    ./plug/lsp/conform.nix
+    # ./plug/lsp/conform.nix
     ./plug/lsp/fidget.nix
     ./plug/lsp/hlchunk.nix
     ./plug/lsp/lsp.nix
