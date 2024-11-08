@@ -1,5 +1,8 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./autocommands.nix
     ./keys.nix
@@ -59,6 +62,7 @@
     ./plug/utils/harpoon.nix
     ./plug/utils/illuminate.nix
     ./plug/utils/markview.nix
+    ./plug/utils/neocord.nix
     ./plug/utils/obsidian.nix
     ./plug/utils/oil.nix
     ./plug/utils/spectre.nix
