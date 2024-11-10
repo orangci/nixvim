@@ -74,9 +74,9 @@
   ];
   options = {
     theme = lib.mkOption {
-      default = lib.mkDefault "paradise";
+      default = lib.mkDefault "catppuccin";
       type = lib.types.enum [
-        "paradise"
+        "catppuccin"
         "decay"
         "edge-dark"
         "mountain"
@@ -99,7 +99,7 @@
   };
   config = {
     # The base16 theme to use, if you want to use another theme, change it in colorscheme.nix
-    theme = "paradise";
+    theme = "catppuccin";
     extraConfigLua = ''
       _G.theme = "${config.theme}"
     '';
